@@ -7,47 +7,29 @@ public class ReaptedSubstring {
 	public static void main(String[] args) {
 		ReaptedSubstring rs = new ReaptedSubstring();
 		// rs.repeatedSubstringPattern("aba");
-		System.out.println(rs.repeatedSubstringPattern("ababba"));
+		System.out.println(rs.repeatedSubstringPattern("abcabcabcabc"));
 
 	}
 
 	public boolean repeatedSubstringPattern(String s) {
-		boolean flag = false;
-		String my="";
-		char[] ch = new char[s.length()];
-		if (s.length() <= 1) {
-			return false;
-		} else if(s.length()==2) {
-			for(int i=0;i<s.length();i++) {
-				if(s.charAt(i)==s.charAt(i+1)) {
-					return true;
-				}
+		int len=s.length();
+		System.out.println(len);
+		for(int i=0;i<len/2;i++) {
+			String str=s.substring(0,i+1);
+			System.out.println(str);
+			int repeat= len/str.length();
+			StringBuilder sb=new StringBuilder();
+			while(repeat>0) {
+				sb.append(str);
+				
+				repeat--;
+			}
+			System.out.println(sb);
+			if(sb.toString().equals(s)) {
+				return true;
 			}
 		}
-		if (s.length() >= 4) {
-			for (int i = 1; i < s.length(); i++) {
-				ch[0] = s.charAt(0);
-				if (s.charAt(0) == s.charAt(i)) {
-					 my = s.substring(i);
-					System.out.println(my);
-					if (s.contains(my)) {
-						for (int j = 0; j<i; j++) {
-							if (ch[j] == my.charAt(j)) {
-								flag = true;
-							} else {
-								return false;
-							}
-						}
-
-						return true;
-					}
-					break;
-				} else {
-					ch[i] = s.charAt(i);
-				}
-			}
-		}
-		return flag;
+		return false;
 
 	}
 
